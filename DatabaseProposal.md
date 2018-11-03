@@ -45,14 +45,14 @@ The user collection will store all users and their profiles. Users will be able 
 }
 ```
 
-| Name           | Type         | Description |
-| -------------- | ------------ | ----------- |
-| _id            | string       |             |
-| username       | string       |             |
-| hashedpassword | string       |             |
-| identity       | String       |             |
-| profile        | User Profile |             |
-| record         | User Record  |             |
+| Name           | Type         | Description                                   |
+| -------------- | ------------ | --------------------------------------------- |
+| _id            | string       | Globally unique id for user's current session |
+| username       | string       | User's login name                             |
+| hashedpassword | string       | A hashed version of the user's password       |
+| identity       | String       | Student or staff                              |
+| profile        | User Profile | User's profile                                |
+| record         | User Record  | User's records                                |
 
 ## User Profile (subdocument)
 
@@ -68,13 +68,13 @@ This subdocument is used to describe the user's profile. These are the informati
 }
 ```
 
-| Name   | Type   | Description |
-| ------ | ------ | ----------- |
-| name   | string |             |
-| gender | string |             |
-| email  | string |             |
-| phone  | string |             |
-| avatar | string |             |
+| Name   | Type   | Description                       |
+| ------ | ------ | --------------------------------- |
+| name   | string | User's real name                  |
+| gender | string | As it is                          |
+| email  | string | As it is                          |
+| phone  | string | As it is                          |
+| avatar | string | A link to the place avatar stored |
 
 ## User Record (subdocument)
 
@@ -101,14 +101,14 @@ This subdocument is used to describe the user's records, stored as a list. Stude
 ]
 ```
 
-| Name       | Type   | Description       |
-| ---------- | ------ | ----------------- |
-| _id        | string |                   |
-| bookid     | string | book id           |
-| time       | string |                   |
-| action     | string | borrow or rent    |
-| returnTime | string | return date       |
-| staffid    | string | operated by staff |
+| Name       | Type   | Description                        |
+| ---------- | ------ | ---------------------------------- |
+| _id        | string | Globally unique id for this action |
+| bookid     | string | As it is                           |
+| time       | string | The time this action was taken     |
+| action     | string | Borrow or rent                     |
+| returnTime | string | Return date                        |
+| staffid    | string | Operated by staff                  |
 
 ## Book
 
@@ -132,35 +132,33 @@ The book collection will store all books and their records. Staff can add, updat
     "record":[
         {
             "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
-            "bookid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
-            "time":"EST-2018-11-22-23-59-59",
+            "studentid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
             "action":"borrow",
-            “returnTime": "EST-2018-11-23-23-59-59",
+            "time":"EST-2018-11-22-23-59-59",
             "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
         },
         {
-            "_id":"7b7997a222-abcd-4f8c-b27a-6a1d4b5b6310",
-            "bookid":"2112223123-abcd-4f8c-b27a-6a1d4b5b6310",
-            "time":"EST-2018-11-22-23-59-58",
-            "action":"rent",
-            “returnTime": "EST-2018-11-23-23-59-59",
+            "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
+            "studentid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+            "action":"return",
+            "time":"EST-2018-11-22-23-59-59",
             "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
         }
     ]
 }
 ```
 
-| Name         | Type         | Description              |
-| ------------ | ------------ | ------------------------ |
-| _id          | string       |                          |
-| title        | string       |                          |
-| edition      | int          |                          |
-| storage      | int          |                          |
-| totalStorage | int          |                          |
-| location     | String       | book location in library |
-| Price        | Float        |                          |
-| profile      | book profile |                          |
-| record       | book record  |                          |
+| Name         | Type         | Description                                    |
+| ------------ | ------------ | ---------------------------------------------- |
+| _id          | string       | Globally unique id for this book               |
+| title        | string       | As it is                                       |
+| edition      | int          | Book edition                                   |
+| storage      | int          | Number of books avaliable for action           |
+| totalStorage | int          | Not all book stored in library.                |
+| location     | String       | Avaliable book's location in library           |
+| Price        | Float        | As it is                                       |
+| profile      | book profile | Description for this book                      |
+| record       | book record  | Record for this book (Could be 100 same books) |
 
 ## Book Profile (subdocument)
 
@@ -175,12 +173,12 @@ This subdocument is used to describe the book's profile.
 }
 ```
 
-| Name        | Type   | Description |
-| ----------- | ------ | ----------- |
-| Author      | string |             |
-| ISBN        | string |             |
-| description | string |             |
-| tag         | string |             |
+| Name        | Type   | Description                       |
+| ----------- | ------ | --------------------------------- |
+| Author      | string | As it is                          |
+| ISBN        | string | As it is                          |
+| description | string | What this book is about           |
+| tag         | string | For search and placement easiness |
 
 ## Book Record (subdocument)
 
@@ -190,14 +188,14 @@ This subdocument is used to describe the book's records.
 [
     {
         "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
-        "userid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+        "studentid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
         "action":"borrow",
         "time":"EST-2018-11-22-23-59-59",
         "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
     },
     {
         "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
-        "userid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+        "studentid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
         "action":"return",
         "time":"EST-2018-11-22-23-59-59",
         "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
@@ -205,11 +203,10 @@ This subdocument is used to describe the book's records.
 ]
 ```
 
-
-| Name    | Type   | Description              |
-| ------- | ------ | ------------------------ |
-| _id     | String |                          |
-| userid  | String |                          |
-| action  | String | borrow or return or sell |
-| time    | string |                          |
-| staffid | String |                          |
+| Name      | Type   | Description                        |
+| --------- | ------ | ---------------------------------- |
+| _id       | String | Globally unique id for this action |
+| studentid | String | Who requred this action            |
+| action    | String | borrow/rent/return/sell            |
+| time      | string | Time this action performed         |
+| staffid   | String | Who operated this action           |
