@@ -23,7 +23,7 @@ The user collection will store all users and their profiles. Users will be able 
         "email":"agoodemail@amail.com",
         "phone":"347-123-1234",
         "avatar":"/imag/masterGroup.png"
-    }
+    },
     "record":[
         {
             "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
@@ -78,7 +78,7 @@ This subdocument is used to describe the user's profile. These are the informati
 
 ## User Record (subdocument)
 
-This subdocument is used to describe the user's records, stored as a list. Student can check the record but can't change it.
+This subdocument is used to describe the user's records, stored as a list. Student can check the record but can't change it. Staff should be able to change this.
 
 ```
 [
@@ -112,25 +112,97 @@ This subdocument is used to describe the user's records, stored as a list. Stude
 
 ## Book
 
-The book collection will store all books and their records. Books will be able to login, update their profile.
+The book collection will store all books and their records. Staff can add, update, and delete this collection.
 
-```javascript
+```
+{
+    "_id":"7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6310",
+    "title": "ABook",
+    "edition": 4,
+    "storage": 9,
+    "totalStorage": 20,
+    "location": "Library 2nd floor 2B-5-20",
+    "price": 20.98,
+    "profile":{
+        "Author": "Someone",
+        "ISBN": "978-0-321-57351-3",
+        "description":"This is a book",
+        "tag": "Tech"
+    },
+    "record":[
+        {
+            "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
+            "bookid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+            "time":"EST-2018-11-22-23-59-59",
+            "action":"borrow",
+            “returnTime": "EST-2018-11-23-23-59-59",
+            "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
+        },
+        {
+            "_id":"7b7997a222-abcd-4f8c-b27a-6a1d4b5b6310",
+            "bookid":"2112223123-abcd-4f8c-b27a-6a1d4b5b6310",
+            "time":"EST-2018-11-22-23-59-58",
+            "action":"rent",
+            “returnTime": "EST-2018-11-23-23-59-59",
+            "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
+        }
+    ]
+}
 ```
 
-| Name         | Type        | Description              |
-| ------------ | ----------- | ------------------------ |
-| _id          | string      |                          |
-| title        | string      |                          |
-| description  | String      |                          |
-| storage      | int         |                          |
-| totalStorage | int         |                          |
-| location     | String      | book location in library |
-| Price        | Float       |                          |
-| Record       | book record |                          |
+| Name         | Type         | Description              |
+| ------------ | ------------ | ------------------------ |
+| _id          | string       |                          |
+| title        | string       |                          |
+| edition      | int          |                          |
+| storage      | int          |                          |
+| totalStorage | int          |                          |
+| location     | String       | book location in library |
+| Price        | Float        |                          |
+| profile      | book profile |                          |
+| record       | book record  |                          |
 
-## Book Record(subdocument)
+## Book Profile (subdocument)
 
-```javascript
+This subdocument is used to describe the book's profile.
+
+```
+{
+    "Author": "Someone",
+    "ISBN": "978-0-321-57351-3",
+    "description":"This is a book",
+    "tag": "Tech"
+}
+```
+
+| Name        | Type   | Description |
+| ----------- | ------ | ----------- |
+| Author      | string |             |
+| ISBN        | string |             |
+| description | string |             |
+| tag         | string |             |
+
+## Book Record (subdocument)
+
+This subdocument is used to describe the book's records.
+
+```
+[
+    {
+        "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
+        "userid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+        "action":"borrow",
+        "time":"EST-2018-11-22-23-59-59",
+        "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
+    },
+    {
+        "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
+        "userid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
+        "action":"return",
+        "time":"EST-2018-11-22-23-59-59",
+        "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
+    }
+]
 ```
 
 
@@ -141,5 +213,3 @@ The book collection will store all books and their records. Books will be able t
 | action  | String | borrow or return or sell |
 | time    | string |                          |
 | staffid | String |                          |
-
-
