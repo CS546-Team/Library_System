@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Segment, Radio } from 'semantic-ui-react'
+import { Form, Segment, Select } from 'semantic-ui-react'
 
 const choice = [
     { key: 'sta', text: 'Staff', value: 'staff' },
@@ -7,17 +7,15 @@ const choice = [
 ]
 
 class SignupPage extends Component {
-    
-/*constructor() {
+    constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleOption = this.handleOption.bind(this);
-    }*/
-
-    getInitialState() {
-        return {
-            value: 'Hello'
+        this.state = {
+            username: "",
+            hashedPassword: "",
+            identity: "Male,defualt"
         };
     }
 
@@ -25,8 +23,8 @@ class SignupPage extends Component {
         event.preventDefault();
         const data = event.target;
         console.log(data);
-        console.log(data.username.value);
-        console.log(data.hashedPassword.valie);
+        console.log(data.username);
+        console.log(data.hashedPassword);
         console.log(data.identity);
 
         fetch('/user', {
@@ -36,58 +34,54 @@ class SignupPage extends Component {
     }
 
     handleInput(event) {
+        let target = event.target.name;
+        let data = event.target;
         this.setState({
-            value: event.target.value
+            [target]: data.value
         });
-        //console.log(renderName);
-        //console.log(renderPass);
+
+        console.log(target);
+        console.log(data.name);
+        // console.log(data.hashedPassword);
+        // console.log(data.identity);
     }
 
     handleOption(event) {
+
+        console.log(event);
+
         this.setState({
-            value: event.target.value
+            identity: event.target.value
         });
-        //console.log(renderId);
+
+        console.log(this.state);
+
     }
 
     render() {
-        let value = this.state.value;
-        //let renderName = this.state.username;
-        //let renderPass = this.state.hashedPassword;
-        //let renderId = this.state.identity;
         return (
             <Segment raised>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                         <Form.Input fluid label='Username' name="username"
-                            onChange={this.handleInput} value={value}
+                            onChange={this.handleInput} value={this.state.username}
                             placeholder='Your Username' />
-                            <p>{value}</p>
                     </Form.Field>
                     <Form.Field>
                         <Form.Input fluid label='Password' name="hashedPassword"
-                            onChange={this.handleInput} value={value}
+                            onChange={this.handleInput} value={this.state.hashedPassword}
                             placeholder='Your Password' />
-                            <p>{value}</p>
                     </Form.Field>
-                    <Form.Group inline>
-                        <label>Identity</label>
-                        <Form.Field
-                            control={Radio}
-                            label='Staff'
-                            value='staff'
-                            checked={value === 'staff'}
-                            onChange={this.handleOption}
-                        />
-                        <Form.Field
-                            control={Radio}
-                            label='Student'
-                            value='student'
-                            checked={value === 'student'}
-                            onChange={this.handleOption}
-                        />
-                        <p>{value}</p>
-                    </Form.Group>
+                    <Form.Field>
+                        <Form.Select fluid label='Identity' name="identity"
+                            onChange={this.handleOption} value={this.state} options={choice}
+                            placeholder='Your Identity' />
+                    </Form.Field>
+                    <Form.Field label='An HTML <select>' control='select'
+                        onChange={this.handleOption} value={this.state.identity}>
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                    </Form.Field>
                     <Form.Button>Submit</Form.Button>
                 </Form>
             </Segment>
