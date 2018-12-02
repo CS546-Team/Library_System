@@ -7,15 +7,17 @@ const choice = [
 ]
 
 class SignupPage extends Component {
-    constructor() {
+    
+/*constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleOption = this.handleOption.bind(this);
-        this.state = {
-            username: "",
-            hashedPassword: "",
-            identity: ""
+    }*/
+
+    getInitialState() {
+        return {
+            value: 'Hello'
         };
     }
 
@@ -23,10 +25,9 @@ class SignupPage extends Component {
         event.preventDefault();
         const data = event.target;
         console.log(data);
-        console.log(data.username);
-        console.log(data.hashedPassword);
+        console.log(data.username.value);
+        console.log(data.hashedPassword.valie);
         console.log(data.identity);
-        console.log(value);
 
         fetch('/user', {
             method: 'POST',
@@ -35,41 +36,39 @@ class SignupPage extends Component {
     }
 
     handleInput(event) {
-        let target = event.target.name;
-        let data = event.target;
         this.setState({
-            [target]: data.value
+            value: event.target.value
         });
-
-        console.log(this.state)
-        console.log(data.name);
-        // console.log(data.hashedPassword);
-        // console.log(data.identity);
+        //console.log(renderName);
+        //console.log(renderPass);
     }
 
-    handleOption(event, { value }) {
+    handleOption(event) {
         this.setState({
-            value
+            value: event.target.value
         });
-        console.log(value)
-        console.log(this.state)
-        // console.log(event.target.value);
+        //console.log(renderId);
     }
 
     render() {
-        const { value } = this.state
+        let value = this.state.value;
+        //let renderName = this.state.username;
+        //let renderPass = this.state.hashedPassword;
+        //let renderId = this.state.identity;
         return (
             <Segment raised>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                         <Form.Input fluid label='Username' name="username"
-                            onChange={this.handleInput} value={this.state.username}
+                            onChange={this.handleInput} value={value}
                             placeholder='Your Username' />
+                            <p>{value}</p>
                     </Form.Field>
                     <Form.Field>
                         <Form.Input fluid label='Password' name="hashedPassword"
-                            onChange={this.handleInput} value={this.state.hashedPassword}
+                            onChange={this.handleInput} value={value}
                             placeholder='Your Password' />
+                            <p>{value}</p>
                     </Form.Field>
                     <Form.Group inline>
                         <label>Identity</label>
@@ -87,6 +86,7 @@ class SignupPage extends Component {
                             checked={value === 'student'}
                             onChange={this.handleOption}
                         />
+                        <p>{value}</p>
                     </Form.Group>
                     <Form.Button>Submit</Form.Button>
                 </Form>
