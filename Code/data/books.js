@@ -136,7 +136,6 @@ async function addBook(data){
     }
     //ISBN不存在，初始化现有存储量和总量 
     else{
-        console.log('enter noISBN part')
         let new_book = await new bookModel({
             "_id": uuid.v4(),
             "title": data.title,
