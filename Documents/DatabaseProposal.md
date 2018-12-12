@@ -30,8 +30,7 @@ The user collection will store all users and their profiles. Users will be able 
             "_id":"7b7997a2-abcd-4f8c-b27a-6a1d4b5b6310",
             "bookid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
             "time":"EST-2018-11-22-23-59-59",
-            "action":"borrow",
-            “returnTime": "EST-2018-11-23-23-59-59",
+            "action":"borrow"
             "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
         },
         {
@@ -39,7 +38,6 @@ The user collection will store all users and their profiles. Users will be able 
             "bookid":"2112223123-abcd-4f8c-b27a-6a1d4b5b6310",
             "time":"EST-2018-11-22-23-59-58",
             "action":"rent",
-            “returnTime": "EST-2018-11-23-23-59-59",
             "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
         }
     ]
@@ -89,7 +87,6 @@ This subdocument is used to describe the user's records, stored as a list. Stude
         "bookid":"21123123-abcd-4f8c-b27a-6a1d4b5b6310",
         "time":"EST-2018-11-22-23-59-59",
         "action":"borrow",
-        “returnTime": "EST-2018-11-23-23-59-59",
         "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
     },
     {
@@ -97,7 +94,6 @@ This subdocument is used to describe the user's records, stored as a list. Stude
         "bookid":"2112223123-abcd-4f8c-b27a-6a1d4b5b6310",
         "time":"EST-2018-11-22-23-59-58",
         "action":"rent",
-        “returnTime": "EST-2018-11-23-23-59-59",
         "staffid":"7b7997a2-abcd-efgh-b27a-6a1d4b5b6310"
     }
 ]
