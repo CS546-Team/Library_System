@@ -203,6 +203,6 @@ This subdocument is used to describe the book's records.
 | --------- | ------ | ---------------------------------- |
 | _id       | String | Globally unique id for this action |
 | studentid | String | Who requred this action            |
-| action    | String | borrow//return                     |
+| action    | String | borrow/return                      | 
 | time      | string | Time this action performed         |
 | staffid   | String | Who operated this action           |
